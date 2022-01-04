@@ -11,20 +11,24 @@ the_bucket = s3.Bucket('my_bucket')
 def append_to_s3(data):
     bucket = os.environ.get("S3_BUCKET")
     try:
+        # TODO hourly buckets
         s3_object = s3.Object(bucket, 'data.csv').get()
         current_data = s3_object['Body'].read().decode('utf-8')
 
     except botocore.exceptions.ClientError:
         current_data = ""
 
+    # TODO timestamp
     new_data = f"{current_data}{data}\n"
 
+    # TODO concurrent modification
     s3.Object(bucket, 'data.csv').put(
         Body=(bytes(new_data.encode('UTF-8')))
     )
 
 
 def validate_data(data):
+    # TODO validation
     pass
 
 
