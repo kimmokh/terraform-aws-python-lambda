@@ -1,0 +1,6 @@
+.terraform
+response.json
+*.tfstate*
+*.hcl
+lambda.zip
+.idea
